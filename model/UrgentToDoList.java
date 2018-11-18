@@ -2,12 +2,6 @@ package model;
 
 import Exceptions.ToDoIsEmptyString;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-
-import static java.awt.Color.RED;
-
 public class UrgentToDoList extends ToDoList {
 
 
@@ -22,10 +16,10 @@ public class UrgentToDoList extends ToDoList {
         }
 
         String[] array = numTodo.split(" ", 2);
-        Integer num = Integer.parseInt(array[0]);
+        Integer num = Integer.parseInt(array[0]) - 1;
         String todo = array[1];
 
-        listOfToDo.add(num,todo);
+        listOfToDo.add(num , todo);
     }
 
 
@@ -34,12 +28,12 @@ public class UrgentToDoList extends ToDoList {
 
         if (itsDailyItemSet == null) {
             itsDailyItemSet = d;
-            d.addUrgentToDoList(this);
+            d.addDailyItem(orderInDailyItemSet,this);
         }
     }
 
 
-    public String getAllToDoInUrgentToDoList(){
+    public String getAllExistingToDoList(){
 
         String allToDo = "";
 
@@ -47,14 +41,14 @@ public class UrgentToDoList extends ToDoList {
 
             if (i == 0) {
 
-                allToDo = listOfToDo.get(0);
+                allToDo = Integer.toString(i+1) + "/ " + listOfToDo.get(i);
             } else {
 
-                allToDo =  allToDo + ", " + Integer.toString(i) + listOfToDo.get(i);
+                allToDo =  allToDo + ", " + Integer.toString(i+1) + "/ " + listOfToDo.get(i);
             }
         }
 
-        return (toDoListTitle + ": " + allToDo);
+        return ("current urgent To-do List " + ": " + allToDo);
     }
 
 }

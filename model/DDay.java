@@ -8,43 +8,139 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
-public class DDay implements DailyItem {
+import Observer.DDayUpdate;
+import dates.Date;
+import javafx.beans.Observable;
+
+public class DDay {
 
     private ArrayList<String> listOfDDay;
     private ArrayList<Integer> listOfDDayDate;
     private DailyItemSet itsDailyItemSet = null;
     DateFormat dateFormat = new SimpleDateFormat("mm/dd");
+    private int orderInDailyItemSet;
+    private int todayDate = 0;
+    private LocalDate now;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    private DDayUpdate dDayUpdate = new DDayUpdate();
 
-    int todayDate = 0;
+    ///////////////////////
+    private List<NewDDay> listOfDDaysForEachDate;
+
 
     // EFFECT : make new listOfToDo
     public DDay() {
-        listOfDDay = new ArrayList<>();
+
+ ;
+
         listOfDDayDate = new ArrayList<Integer>();
+        listOfDDay = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
        // todayDate = Integer.parseInt(dateFormat.format(cal));
 
+
+        listOfDDaysForEachDate = new ArrayList<>();
+
     }
 
-    @Override
+//    public void addDDay(Date date, String dDay, int year, int month, int day) {
+//
+//        if(DDays.get(date) == null) {
+//
+//            Date standardDate;
+//
+//            listOfDDay = new ArrayList<>();
+//            listOfDDay.add(dDay);
+//            Date newDate = new Date(year, month, day);
+//
+//            List<Map.Entry<Date, List<String>>> entries = new ArrayList<Map.Entry<Date, List<String>>>(DDays.entrySet());
+//            while (true) {
+//                for (int i = 0; i < entries.size(); i++) {
+//
+//                    if (!newDate.IsLaterDate(entries.get(i).getKey())) {
+//
+//                        standardDate = entries.get(i).getKey();
+//                        break;
+//                    }
+//                }
+//            }
+//
+//
+//
+//        }
+//        else {
+//
+//            DDays.get(date).add(dDay);
+//        }
+//    }
+
+    public void displayDDay(String[] todayDateList) {
+
+
+    }
+
+
+    public void addDDayOnGivenDate (Date date, String dDay) {
+
+        for(int i = 0; i < listOfDDaysForEachDate.size(); i++) {
+            if (listOfDDaysForEachDate.get(i).getDate().equals(date)){
+
+                listOfDDaysForEachDate.get(i).addDDays(dDay);
+            }
+        }
+
+        NewDDay newDDay = new NewDDay(date);
+        newDDay.addDDays(dDay);
+        newDDay.addObserver(dDayUpdate);
+        listOfDDaysForEachDate.add(newDDay);
+    }
+
+
+    public void updateDDayDisplayInDDay() {
+
+        deleteAllOldDDays();
+
+        for(int i = 0; i < listOfDDaysForEachDate.size(); i++) {
+
+            listOfDDaysForEachDate.get(i).updateDDayDisplayInNewDDay();
+        }
+    }
+
+
+    public void deleteAllOldDDays() {
+
+        now = LocalDate.now();
+        String todayDate = now.format(dtf);
+        String [] todayDateList = todayDate.split("/");
+        Date todayDateObject = new Date(Integer.parseInt(todayDateList[0]),Integer.parseInt(todayDateList[1]),Integer.parseInt(todayDateList[2]));
+
+        for(int i = 0; i < listOfDDaysForEachDate.size(); i++) {
+
+            if(!listOfDDaysForEachDate.get(i).getDate().IsLaterDate(todayDateObject)) {
+
+                listOfDDaysForEachDate.remove(listOfDDaysForEachDate.get(i));
+            }
+        }
+
+    }
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
-    // EFFECT : add dDate that is setted for dDay
+    // EFFECT : add dDate that is set for dDay
     public void setDate(int dDate) {
 
         listOfDDayDate.add(dDate);
     }
 
-    @Override
-    // EFFECT : return the date of today
-    public int getDate() {
-        return todayDate;
-    }
 
-    @Override
+
     public int getDailyFromList() {
         return 0;
     }
@@ -54,7 +150,7 @@ public class DDay implements DailyItem {
         return listOfDDayDate.get(i);
     }
 
-    @Override
+
     public int getSizeOfDailyList() {
         return listOfDDay.size();
     }
@@ -65,7 +161,7 @@ public class DDay implements DailyItem {
     }
 
 
-    @Override
+
     // EFFECT : add DDay into listOfDay
     public void insertDaily(String DDay) {
 
@@ -80,7 +176,7 @@ public class DDay implements DailyItem {
         listOfDDayDate.add(DDayDate);
     }
 
-    @Override
+
     public void save(String title) throws IOException {
 
         // [1,2,3,4,5] => 1 2 3 4 5
@@ -105,7 +201,7 @@ public class DDay implements DailyItem {
         writer.close();
     }
 
-    @Override
+
     public void load(String title) throws IOException {
 
         List<String> lines = Files.readAllLines(Paths.get(title +".txt"));
@@ -145,12 +241,22 @@ public class DDay implements DailyItem {
         return dDay;
     }
 
-    @Override
-    public void addItsDailyItemSet(DailyItemSet d) {
 
-        if(itsDailyItemSet == null) {
-            itsDailyItemSet = d;
-            d.addDDay(this);
-        }
+//    public void addItsDailyItemSet(DailyItemSet d) {
+//
+//        if(itsDailyItemSet == null) {
+//            itsDailyItemSet = d;
+//            d.addDailyItem(orderInDailyItemSet, this);
+//        }
+//    }
+
+    public String getAllExistingToDoList() {
+        return "DDay does not provide list";
     }
+
+    public void setOrderInDailyItemSet(int order) {
+        orderInDailyItemSet = order;
+    }
+
+
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import model.DDay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class DDayTest {
 
     private DDay testDDayTesting;

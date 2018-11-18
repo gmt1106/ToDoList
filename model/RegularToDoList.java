@@ -25,7 +25,30 @@ public class RegularToDoList extends ToDoList {
 
         if (itsDailyItemSet == null) {
             itsDailyItemSet = d;
-            d.addRegularToDoList(this);
+            d.addDailyItem(orderInDailyItemSet, this);
         }
     }
+
+    @Override
+    public String getAllExistingToDoList() {
+
+        String allToDo = "";
+
+        for (int i = 0; i < listOfToDo.size(); i++) {
+
+            if (i == 0) {
+
+                allToDo = listOfToDo.get(0);
+            } else {
+
+                allToDo =  allToDo + ", " + listOfToDo.get(i);
+            }
+        }
+
+        return ("current regular To-do List " + ": " + allToDo);
+    }
+
+
+
 }
+

@@ -7,7 +7,6 @@ public class Date {
 
     private Integer year;
     private Integer month;
-    private String day;
     private Integer date;
     private ArrayList<String> dueThings;
 
@@ -16,7 +15,6 @@ public class Date {
         this.year = year;
         this.month = month;
         this.date = date;
-        this.day = day;
 
     }
 
@@ -27,13 +25,32 @@ public class Date {
         Date date1 = (Date) o;
         return Objects.equals(year, date1.year) &&
                 Objects.equals(month, date1.month) &&
-                Objects.equals(day, date1.day) &&
                 Objects.equals(date, date1.date);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(year, month, day, date);
+        return Objects.hash(year, month, date);
+    }
+
+    public boolean IsLaterDate(Date date) {
+
+        if (this.year > date.year || this.month > date.month || this.date > date.date) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+    public Integer getDate() {
+        return date;
     }
 }
