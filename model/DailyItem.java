@@ -3,6 +3,7 @@ package model;
 import Exceptions.ToDoIsEmptyString;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface DailyItem {
 
@@ -14,5 +15,7 @@ public interface DailyItem {
     public void addItsDailyItemSet (DailyItemSet d);
     public String getAllExistingToDoList();
     public void setOrderInDailyItemSet(int order);
-
+    public void deleteOldDDay();
+    public List<String> getListOfToDo();
+    public void setRangeForUrgentToDoList(int i);
 }

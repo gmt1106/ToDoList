@@ -1,26 +1,23 @@
 package model;
 
+import Observer.DDayUpdate;
 import dates.Date;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Scheduler {
+public class Scheduler implements Iterable<Date> {
 
-    private Map<Date, DailyItemSet> schedulerMap;
-    private DDay dDays;
+    private Map<Date, DailyItemSet> schedulerMap = new HashMap<>();
+    private DDayManager dDayManager;
 
-    public Scheduler() {
+    public Scheduler(DDayUpdate dDayUpdate) {
 
-        schedulerMap = new HashMap<>();
-        dDays = new DDay();
-//        updateDDayDisplay();
+        dDayManager = new DDayManager(this, dDayUpdate);
     }
 
 
@@ -45,8 +42,67 @@ public class Scheduler {
 
     public void updateDDayDisplayInScheduler() {
 
-        dDays.updateDDayDisplayInDDay();
+        dDayManager.updateDDayDisplayInNewDDay();
+
     }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<Date> iterator() {
+        Set<Date> dates = schedulerMap.keySet();
+        return dates.iterator();
+    }
+
+    public void deleteOldDDay(Date date) {
+        schedulerMap.get(date).deleteOldDDay();
+    }
+
+
+    //    public void save(String title) throws IOException {
+//
+//        // [1,2,3,4,5] => 1 2 3 4 5
+//
+//        // 1 2 3 4 5
+//        // task1
+//        // task2
+//        // task3
+//
+//        PrintWriter writer = new PrintWriter(new FileWriter(new File(title +".txt")));
+//        StringBuilder builder = new StringBuilder();
+//        for(Integer i : listOfDDayDate) {
+//            builder.append(i);
+//            builder.append(" ");
+//        }
+//        List<String> lines = new ArrayList<>();
+//        lines.add(builder.toString().trim());
+//        lines.addAll(listOfDDay);
+//        for(String line : lines) {
+//            writer.println(line);
+//        }
+//        writer.close();
+//    }
+//
+//
+//    public void load(String title) throws IOException {
+//
+//        List<String> lines = Files.readAllLines(Paths.get(title +".txt"));
+//
+//        // task1
+//        // task2
+//        // task3
+//
+//        String nums = lines.remove(0);
+//
+//        String[] array = nums.split(" ");
+//        for(String number : array) {
+//            listOfDDayDate.add(Integer.parseInt(number));
+//        }
+//        listOfDDay.addAll(lines);
+//    }
 
 
 }

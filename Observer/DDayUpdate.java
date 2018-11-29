@@ -1,15 +1,13 @@
 package Observer;
 
-import model.NewDDay;
+import model.DDayManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class DDayUpdate implements Observer{
 
     private int numberOfDDay;
+    private List<String> outPutList = new ArrayList<>();
 
     public DDayUpdate(){
 
@@ -30,16 +28,27 @@ public class DDayUpdate implements Observer{
 
         numberOfDDay++;
 
-        NewDDay newDDay = (NewDDay) arg;
-        Integer dDate = newDDay.getDYear()*12*30 + newDDay.getDMonth()*30 + newDDay.getDDate();
-        List<String> toDos = newDDay.getDToDo();
+        DDayManager dDayManager = (DDayManager) o;
+        Integer dDate = (Integer) arg;
 
-        for (int i = 0; i < toDos.size(); i++){
-            System.out.println(toDos.get(i) + " - " + dDate);
+        String DDays = dDayManager.getReturnString();
+        String[] listOfDDays = DDays.split("/");
+
+        numberOfDDay = numberOfDDay + listOfDDays.length;
+
+
+        for(String dDay : listOfDDays) {
+            outPutList.add(dDate + " - " + dDay);
         }
+
     }
 
     public Integer getNumberOfDDay() {
         return numberOfDDay;
+    }
+
+    public List<String> outPutDDaysWithDate() {
+
+        return outPutList;
     }
 }

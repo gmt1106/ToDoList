@@ -48,6 +48,15 @@ public class RegularToDoList extends ToDoList {
         return ("current regular To-do List " + ": " + allToDo);
     }
 
+    @Override
+    public void deleteOldDDay() {
+
+    }
+
+    @Override
+    public void setRangeForUrgentToDoList(int i) {
+
+    }
 
 
 }

@@ -4,6 +4,16 @@ import Exceptions.ToDoIsEmptyString;
 
 public class UrgentToDoList extends ToDoList {
 
+    public void setRangeForUrgentToDoList(int k) {
+
+        if(!(listOfToDo.size() == k)){
+            for (int i = 0; i < k; i++) {
+
+                listOfToDo.add(null);
+            }
+        }
+    }
+
 
     //REQUIRE: to-do can not be empty string
     //MODIFY: this
@@ -19,7 +29,8 @@ public class UrgentToDoList extends ToDoList {
         Integer num = Integer.parseInt(array[0]) - 1;
         String todo = array[1];
 
-        listOfToDo.add(num , todo);
+        listOfToDo.set(num , todo);
+
     }
 
 
@@ -49,6 +60,11 @@ public class UrgentToDoList extends ToDoList {
         }
 
         return ("current urgent To-do List " + ": " + allToDo);
+    }
+
+    @Override
+    public void deleteOldDDay() {
+
     }
 
 }

@@ -1,6 +1,7 @@
 package dates;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Date {
@@ -34,7 +35,7 @@ public class Date {
         return Objects.hash(year, month, date);
     }
 
-    public boolean IsLaterDate(Date date) {
+    public boolean isLaterDate(Date date) {
 
         if (this.year > date.year || this.month > date.month || this.date > date.date) {
             return true;
@@ -52,5 +53,17 @@ public class Date {
     }
     public Integer getDate() {
         return date;
+    }
+
+    public Integer calculateNumberOfDaysLeft(Date todayDate) {
+
+        Integer dYear = year - todayDate.getYear();
+        Integer dMonth = month - todayDate.getYear();
+        Integer dDay = date - todayDate.getDate();
+
+        Integer newDDay = (dYear*12*30 + dMonth*30 + dDay);
+
+        return newDDay;
+
     }
 }

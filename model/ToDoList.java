@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 public abstract class ToDoList implements DailyItem {
 
-    protected ArrayList<String> listOfToDo;
+    protected List<String> listOfToDo;
     protected int toDoListTitle;
     protected DailyItemSet itsDailyItemSet = null;
     protected int orderInDailyItemSet;
@@ -24,6 +24,9 @@ public abstract class ToDoList implements DailyItem {
         toDoListTitle = title;
     }
 
+    public List<String> getListOfToDo() {
+        return listOfToDo;
+    }
 
     @Override
     public int getDailyFromList() {
@@ -54,15 +57,6 @@ public abstract class ToDoList implements DailyItem {
         listOfToDo.addAll(lines);
     }
 
-
-    public boolean isEmpty() {
-
-        if (listOfToDo.isEmpty()) {
-            return true;
-        }
-
-        return false;
-    }
 
 
     protected boolean stringOnlyContainSpaces(String s) {
