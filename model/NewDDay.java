@@ -1,6 +1,6 @@
 //package model;
 //
-//import Observer.DDayUpdate;
+//import observer.DDayUpdate;
 //import com.sun.tools.corba.se.idl.InterfaceGen;
 //import dates.Date;
 //import javafx.beans.InvalidationListener;
@@ -10,7 +10,7 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //import java.util.Observable;
-//import java.util.Observer;
+//import java.util.observer;
 //
 //public class NewDDay extends Observable {
 //

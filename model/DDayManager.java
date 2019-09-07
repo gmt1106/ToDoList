@@ -1,11 +1,10 @@
 package model;
 
-import Observer.DDayUpdate;
+import observer.DDayUpdate;
 import dates.Date;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Observable;
 
 public class DDayManager extends Observable {

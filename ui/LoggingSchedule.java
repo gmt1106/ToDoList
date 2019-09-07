@@ -1,12 +1,11 @@
 package ui;
 
 import Exceptions.ToDoIsEmptyString;
-import Observer.DDayUpdate;
+import observer.DDayUpdate;
 import model.*;
 import dates.Date;
 import javax.swing.*;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 

@@ -6,15 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import dates.Date;
 import java.util.ArrayList;
 import java.util.List;
-
-import Observer.DDayUpdate;
-import dates.Date;
 
 
 public class DDay implements DailyItem {
